@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://rtjw2sc6x1il"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_gvgls"]
+[ext_resource type="PackedScene" uid="uid://b6n3ajm75tfgj" path="res://bg.tscn" id="2_in0h2"]
+[ext_resource type="FontFile" uid="uid://bov56drhtii4y" path="res://PublicPixel-z84yD.ttf" id="3_mqdam"]
+
+[sub_resource type="GDScript" id="GDScript_ge8wt"]
+script/source = "extends Label
+
+func _process(delta):
+	text = \"Wins: \" + str(Game.wins)
+"
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_gvgls")
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 454.0
+offset_top = 141.0
+offset_right = 696.0
+offset_bottom = 272.0
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 454.0
+offset_top = 284.0
+offset_right = 696.0
+offset_bottom = 415.0
+text = "Quit"
+
+[node name="BG" parent="." instance=ExtResource("2_in0h2")]
+
+[node name="WinsTracker" type="Label" parent="."]
+offset_left = 95.0
+offset_top = 71.0
+offset_right = 191.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_mqdam")
+theme_override_font_sizes/font_size = 24
+text = "Wins"
+script = SubResource("GDScript_ge8wt")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 339.0
+offset_top = 466.0
+offset_right = 819.0
+offset_bottom = 489.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_mqdam")
+text = "Collect all 8 cherries to win!"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
